@@ -33,7 +33,7 @@ jobs:
       - name: Convert Notebooks
         run: |
           # This converts notebooks so Jekyll can see them as HTML files
-          jupyter nbconvert --to html *.ipynb
+          find . -name "*.ipynb" -exec jupyter nbconvert --to html {} +
       # --------------------------------------------
 
       - name: Setup Pages
