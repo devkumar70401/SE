@@ -1,60 +1,22 @@
-name: Deploy Jekyll and Notebooks to Pages
-
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
-
+  push:
+    branches:
+      - main
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  build:
+  build-documentation:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      # --- NEW: Convert Notebooks to HTML first ---
-      - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/checkout@v3
         with:
-          python-version: '3.10'
+          fetch-depth: 0
 
-      - name: Install nbconvert
-        run: pip install nbconvert
-
-      - name: Convert Notebooks
-        run: |
-          # This converts notebooks so Jekyll can see them as HTML files
-          find . -name "*.ipynb" -exec jupyter nbconvert --to html {} +
-      # --------------------------------------------
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: Devendra Portfolio
+        uses: devendra545/SE@main
         with:
-          source: ./
-          destination: ./_site
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+          source: SE/notebooks
+          dependencies: requirements.txt
