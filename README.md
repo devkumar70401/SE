@@ -1,6 +1,7 @@
 # SE
 
 **Job Title:** AI Engineer
+**Job Duration:** 1 Jan 2027 - Present
 
 **Process:**
 
