@@ -1,0 +1,98 @@
+class Library{
+    public static int No_Of_Books;
+    public String Name;
+    public Library(){
+        No_Of_Books++;                                                                                                                         
+    }
+
+    public Library(String Name){
+        this.Name = Name;
+    }
+                                                                                                                                                   
+    public void displayBookInfo(Books book){
+            System.out.println("Name : " + book.getName());
+            System.out.println("Author Name : " + book.getAuthor());
+            System.out.println("ISBN : " + book.getISBN());
+    }
+
+    public void changeBookName(Books book, String Name){
+        book.setName(Name);
+    }
+}  
+
+class Books extends Library{
+    private String Name;
+    private String Author;
+    private int ISBN;
+                                                                                                                                                   
+    public Books(String Name, String Author, int ISBN){
+            this.Name = Name;
+            this.Author = Author;
+            this.ISBN = ISBN;
+    }                                                                                                                                              
+                                                                                                                                                   
+    public String getName(){
+            return this.Name;
+    }                                                                                                                                              
+                                                                                                                                                   
+    public String getAuthor(){
+            return this.Author;
+    }                                                                                                                                              
+                                                                                                                                                   
+    public int getISBN(){
+            return this.ISBN;
+    }                                                                                                                                              
+                                                                                                                                                           
+    public void setName(String Name){
+        this.Name = Name;
+    }
+
+    public void setAuthor(String Author){
+        this.Author = Author;
+    }
+
+    public void setISBN(int ISBN){
+        this.ISBN = ISBN;
+    }
+
+    public void readBook(){
+        System.out.println("Reading a book...");
+    } 
+}                                                                                                                                                      
+                                                                                                                                                   
+class Special_Books extends Books{
+    private String Genre;
+
+    public Special_Books(String Name, String Author, int ISBN, String Genre){
+        super( Name,  Author,  ISBN);
+        this.Genre = Genre;
+    }
+
+    public String getGenre(){
+        return this.Genre;
+    }  
+
+    public void setGenre(String Genre){
+        this.Genre = Genre;
+    }
+
+    public void readBook(){
+            System.out.println("Reading a special book...");
+    }
+}
+
+public class Q1_new{
+    public static void main(String args[]){
+        Books b1 = new Books("book 1", "author 1", 1273);
+        b1.readBook();
+
+        Books b2 = new Special_Books("book 2", "author 2", 5341,"Fiction");
+        b2.readBook();
+
+        Library l = new Library("New Library");
+        l.displayBookInfo(b2);
+        l.changeBookName(b1, "new book 1");
+        System.out.println("Changed Book Name : " + b1.getName());
+        System.out.println("Total number of books : " + Library.No_Of_Books);
+    }
+}

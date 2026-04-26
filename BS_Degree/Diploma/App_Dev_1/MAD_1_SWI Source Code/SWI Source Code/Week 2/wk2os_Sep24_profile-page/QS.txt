@@ -1,0 +1,27 @@
+# Create a profile page using HTML and CSS
+
+#things to learn
+#HTML
+1. HTML Elements
+2. divs
+3. headings
+4. paragraphs
+5. anchor
+6. image
+7. ordered/unordered list
+
+#CSS styling
+1. block and inline Elements
+2. CSS Box Model
+3. Borders
+4. background
+5. shorthand
+
+#inline1 inline2
+#block
+#display
+inline, block , 
+inline-block inline>come beside, block >width
+flex: inline block
+
+#Note: use can use html attributes like table border attribute in lab assignment there is no harm 

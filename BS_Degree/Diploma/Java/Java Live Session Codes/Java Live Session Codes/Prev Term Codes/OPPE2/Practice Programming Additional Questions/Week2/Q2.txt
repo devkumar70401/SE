@@ -1,0 +1,87 @@
+Given is a class called Vowels.
+Define the missing constructor and the copy constructor.
+The instance variable count stores the number of vowels in the text, assign its value in the constructor accordingly.
+Use the static method isVowel wherever needed which returns true if a character is vowel and false otherwise.
+The manipulate method replaces every vowel occurence in the text with the character "V" and finally change the value of the instance variable "text" to the new manipulated string.
+Complete all the method definitions in accordance with the test case provided.
+
+NOTE: assume all characters are lowercase 
+
+
+Test Case 1
+
+Input:
+apple
+
+Output:
+2
+VpplV
+apple
+
+
+Test Case 2:
+
+Input:
+racecar
+
+Output:
+3
+rVcVcVr
+racecar
+
+
+
+
+
+import java.util.*;
+
+class Vowels{
+    private String text;
+    private int count;
+
+    // Define the constructor 
+    public Vowels(String text){
+        
+    }
+
+    // Define the copy constructor
+    public Vowels(Vowels v){
+       
+    }
+
+    // Define all the methods as mentioned in the question and in accordance with the test cases
+    public static boolean isVowel(char x){
+       
+        
+    }
+
+    public String getOriginalText(){
+        
+    }
+
+    public int getCount(){
+        
+    }
+
+    public void manipulate(){
+
+    }
+    
+}
+
+public class MClass {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        String t = sc.nextLine();
+        Vowels v1 = new Vowels(t);
+        Vowels v2 = new Vowels(v1);
+
+        System.out.println(v2.getCount());
+        v2.manipulate();
+        System.out.println(v2.getOriginalText());
+        System.out.println(v1.getOriginalText());
+        sc.close();
+    }
+}
+
+

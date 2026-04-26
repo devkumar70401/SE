@@ -1,0 +1,74 @@
+import java.util.*;
+
+class Vowels{
+    private String text;
+    private int count;
+
+    public Vowels(String text){
+        this.text = text;
+
+        int l = this.text.length();
+        for(int i = 0; i < l; i++){
+            if(isVowel(this.text.charAt(i))){
+                this.count++;
+            }
+        }
+        
+    }
+
+    public Vowels(Vowels v){
+        this.text = v.text;
+        this.count = v.count;
+    }
+
+    public static boolean isVowel(char x){
+        switch(x){
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+            case 'u':
+                return true;
+        }
+        return false;
+        
+    }
+
+    public String getOriginalText(){
+        return this.text;
+    }
+
+    public int getCount(){
+        return this.count;
+    }
+
+    public void manipulate(){
+        String manipulated = "";
+        int l = this.text.length();
+        for(int i = 0; i < l; i++){
+            if(isVowel(this.text.charAt(i))){
+                manipulated += "V";
+            }
+            else{
+                manipulated += this.text.charAt(i);
+            }
+        }
+        this.text = manipulated;
+    }
+    
+}
+
+public class MClass {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        String t = sc.nextLine();
+        Vowels v1 = new Vowels(t);
+        Vowels v2 = new Vowels(v1);
+
+        System.out.println(v2.getCount());
+        v2.manipulate();
+        System.out.println(v2.getOriginalText());
+        System.out.println(v1.getOriginalText());
+        sc.close();
+    }
+}

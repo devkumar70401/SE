@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue - Introduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .green{
+            background-color: green;
+        }
+        .yellow{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="app">
+        {{message}}
+    </div>
+    <div id="app">
+        {{message}}
+    </div> -->
+
+    <div id="app">
+        <!-- <h1>{{message}}</h1> -->
+        <!-- one way data binding,data flowing from script to html  -->
+
+        <!-- <h2 class="yellow">{{myClass}}</h2> -->
+
+        <!-- <h2 class="{{myClass}}">{{myClass}}</h2> -->
+
+        <!-- <h2 v-bind:class="myClass">{{myClass}}</h2> -->
+            <!-- <h2 v-bind:<attribute_name> = "<defined_data_property>">Content</h2> -->
+
+        <!-- <h2 v-if="seen">Hello, Am I visible</h2> -->
+            <!-- <h2> v-if="<expression>">Content</h2>  remove the element-->
+
+        <!-- <h2 v-show="seen">Hello, Am I visible</h2>  -->
+            <!-- <h2> v-show="<expression>">Content</h2>  not remove the element, only make display off-->
+
+        <!-- <ul>
+            <li>mad1</li>
+            <li>mad2</li>
+            <li>dbms</li>
+            <li>pdsa</li>
+        </ul> -->
+
+        <!-- <ul>
+            <li v-for="course in myArr">{{course}}</li>
+        </ul> -->
+
+        <!-- My Favourite movie: <input :name="movie" type="text">
+        Current value of movie: {{movie}} -->
+
+        <!-- My Favourite movie: <input :value="movie" type="text"> 
+        Current value of movie: {{movie}} -->
+        <!-- //give value to movie that will appear -->
+
+         <!-- ===========static data was displayed, js>html,one way binding==== -->
+
+        <!-- My Favourite movie: <input v-model="movie" type="text">
+        Current value of movie: {{movie}} -->
+        <!-- two way data binding -->
+
+
+        <!-- My Favourite movie: <input v-model="movie" type="text">
+        <button v-on:click="logMovie">log movie</button>
+        <h4>Current value of movie: {{movie}}</h4> -->
+
+        <!-- <button @click="logMovie">log movie</button> -->
+
+        <!-- <h2>{{firstname}}, {{lastname}}</h2>
+        <h2>{{fullname}}</h2> -->
+        My Favourite movie: <input v-model="movie" type="text">
+        <h2>sequel: {{sequel}}</h2>
+    </div>
+    <!-- <div id="app">
+        {{message}}
+    </div> -->
+    <!-- one element one app ,vue doesnt allow this, to reuse the code we have components-->
+    <!-- {{message}} -->
+    <script src="./script.js"></script>
+</body>
+</html>
+
+<!-- attribute (HTML) : green (Vue) -->
+<!-- shorthands -->
+<!-- v-bind: - : data flows from script to html, one way binding-->
+<!-- v-on: -> @  -->
+<!-- v-model: -> to make sure data flows from html to script, and vice-versatwo way binding  -->
+
+<!-- click on the button click event --> 
+ <!-- triggering func -> logging on console -->
+<!-- v-on:event="do_something"
+v-on:mouseover="do_this" --> 
+<!-- mouseover, click,drag ,scroll -->
+<!-- All manual trigger functions come under methods -->

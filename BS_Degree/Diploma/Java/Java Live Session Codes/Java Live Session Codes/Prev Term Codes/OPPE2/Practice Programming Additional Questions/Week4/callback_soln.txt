@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+class Account {
+    public static int[] account_numbers;
+    private static Account new_account;
+    private static int current_account_no = 0;
+
+    private Account() {
+        current_account_no++;
+    }
+
+    public static Account getAccount() {
+        new_account = new Account();
+        return new_account;
+    }
+
+    public void firstTransaction() {
+        System.out.println("Transaction 1 for account " + account_numbers[0] + " in process");
+        Transaction.makeNextTransaction();
+    }
+
+    public void processTransaction() {
+        System.out.println("Transaction " + current_account_no + " for account " + account_numbers[current_account_no - 1] + " in process");
+        Transaction.makeNextTransaction();
+    }
+}
+
+class Transaction {
+    public static int total_no_of_transactions;
+    private static int transaction_count = 1;
+
+    public static void makeNextTransaction() {
+        System.out.println("Transaction number " + transaction_count + " completed!");
+
+        if (transaction_count < total_no_of_transactions) {
+            transaction_count++;
+            Account a = Account.getAccount();
+            a.processTransaction();
+        }
+    }
+}
+
+public class callback {
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        Transaction.total_no_of_transactions = in.nextInt();
+        Account.account_numbers = new int[Transaction.total_no_of_transactions];
+
+        for (int i = 0; i < Transaction.total_no_of_transactions; i++) {
+            Account.account_numbers[i] = in.nextInt();
+        }
+
+        Account a = Account.getAccount();
+        a.firstTransaction();
+
+        in.close();
+    }
+}

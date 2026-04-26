@@ -1,0 +1,568 @@
+// Qs 1 Copy Constructor
+// Problem Statement
+// In a college, Student s1 chooses a set of courses. Student s2 also chooses all the courses
+// chosen by s1 except the second course, in place of which s2 chooses another course. Write a
+// program that defines two classes Student and Admission. Define copy constructor to create
+// s2 from s1 such that changing the values of instance variables of either s2 or s1 does not
+// affect the other one. The code takes name of student s2 and the new course chosen by s2 as
+// input.
+// • Class Student has/should have the following members.
+// – Private instance variables String name and String[] courses to store name
+// and courses chosen respectively
+// – Define required constructor(s)
+// – Accessor methods getName( ) and getCourses(int) to get the name of the
+// student and the course at a specific index respectively.
+// – Mutator methods setName(String) and setCourses(int,String) to set the
+// name of the student and the course at a specific index respectively.
+// • Class Admission has method main that does the following.
+// – Two objects of Student s1 and s2 are created. s2 is created using s1
+// – name of Student s2 and second course chosen by s2 are updated by taking the
+// input
+// – Finally, name of s1, s2 and second course chosen by s1 and s2 are printed
+// What you have to do
+// • Define constructor(s) in class Student
+
+
+
+import java.util.*;
+class Student{
+    String name;
+    String[] courses;
+//***** Define constructor(s) here
+    public Student(String n, String[] c){
+        name = n;
+        courses = c;
+    }
+
+    //copy constructor
+    public Student(Student s){
+        this.name = s.name;
+        this.courses = new String[s.courses.length];
+        // {--,---,---,---}
+        for(int i=0; i<s.courses.length; i++){
+            this.courses[i] = s.courses[i];
+        }
+
+        //{"Maths", "DL","DSA","DC"}
+    }
+
+
+
+    public void setName(String n) {
+        name = n;
+        
+    }
+    public void setCourses(int indx, String c) {
+        courses[indx] = c;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getCourses(int indx) {
+        return courses[indx];
+    }
+}
+public class Admission {
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String[] courses = {"Maths", "DL","DSA","DC"};
+
+    Student s1 = new Student("Nandu", courses);//constructor 1
+    Student s2 = new Student(s1); //copy constructor - we create an instance using another instance
+
+    s2.setName(sc.next());
+    s2.setCourses(1,sc.next());
+    System.out.println(s1.getName() + ": "+ s1.getCourses(1));
+    System.out.println(s2.getName() + ": " + s2.getCourses(1));
+
+
+}
+}
+
+
+/*
+Test cases:
+Public test case 1:
+
+Input:
+Suba COA
+
+Output:
+Nandu: DL
+Suba: COA
+
+Public test case 2:
+
+Input:
+Pai CV
+
+Output:
+Nandu: DL
+Pai: CV
+*/
+
+
+------------------------------------------------------------------------------------------------
+
+
+// Question-2 Interfaces
+// Problem Statement
+// A smartphone is both a mobile device and a camera. Complete the Java program below in
+// order to print customized messages based on which among the two roles - mobile device or
+// camera - of a smartphone is being given as input.
+
+
+// • Interface MobileDevice has the abstract method makeCall()
+
+// • Interface Camera has the abstract method takePicture()
+
+
+// • Class Smartphone has properties of both a MobileDevice and a Camera, and has the
+// following members:
+// – method makeCall() that returns the string: <Name of the device> makes a
+// call
+// – method takePicture() that returns the string: <Name of the device> takes
+// a picture
+
+
+// • Class InterfaceTest has the main method that does the following:
+// – Accepts as input the types and names of 3 devices
+// – If the type is M, then invoke method makeCall(), else invoke method takePicture()
+// – Print the messages
+// What you have to do
+// • Define interface MobileDevice
+// • Define interface Camera
+// • Define class Smartphone
+
+/*
+Test Cases
+Public test case 1 (Input):
+M Samsung
+C Canon
+M iPhone
+Output:
+Samsung makes a call
+Canon takes a picture
+iPhone makes a call
+ */
+
+
+import java.util.*;
+//DEFINE interface MobileDevice
+interface MobileDevice {
+    String makeCall();    
+}
+
+//DEFINE interface Camera
+interface Camera {
+    String takePicture();    
+}
+//DEFINE class Smartphone
+class Smartphone implements Camera, MobileDevice{
+    public String name;
+    public Smartphone(String n){
+        this.name = n;
+    }
+    public String makeCall(){
+        return name + " make a call";
+    }
+    public String takePicture(){
+        return name + " takes a picture";
+    }
+}
+
+class InterfaceTest{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> messagesList = new ArrayList<>();
+        for(int i=0;i<3;i++){
+            String type = sc.next();
+                if (type.equals("M")){
+                    MobileDevice m = new Smartphone(sc.next());
+                    messagesList.add(m.makeCall());
+                }
+                else if (type.equals("C")){
+                    Camera c = new Smartphone(sc.next());
+                    messagesList.add(c.takePicture());
+                }
+        }
+        for (String s:messagesList){
+            System.out.println(s);
+        }
+        sc.close();
+    }
+}
+
+
+------------------------------------------------------------------------------------------------
+
+
+// Question 3 - Dynamic Dispatch
+// Problem Statement
+// Complete the Java code that uses the concept of inheritance to demonstrate dynamic method
+// dispatching.
+
+
+// • Create a class Vehicle with the following members:
+// – Private instance variable name.
+// – Constructor to initialize name.
+// – Accessor method for name.
+// – Method display to display the text: ”This is a generic vehicle.”
+
+
+// Classes Car and Bicycle should be defined in such a way that any object of Car or
+// Bycycle can be assigned to a reference variable of type Vehicle. See the main method
+// to understand the context.
+
+
+
+// – For Car, the method display should print: ”This is a car named <name> .”
+// – For Bicycle, the method display should print: ”This is a bicycle named <name> .”
+// In the main method of the DispatchExample class, create an array of Vehicle objects with
+// size 3.
+// • Initialize the first element with a generic vehicle (you can use an empty string for its
+// name).
+// • Initialize the second and third elements with a Car and a Bicycle, respectively, by
+// taking the vehicle’s name as input from the user.
+// Iterate over the array and call the display method for each vehicle.
+
+/*
+Sample Input/Output
+Input:
+BMW
+Giant
+Output:
+This is a generic vehicle.
+This is a car named BMW.
+This is a bicycle named Giant.
+ */
+
+
+import java.util.Scanner;
+class Vehicle {
+    private String name;
+    public Vehicle(String n) {
+        name = n;
+    }
+
+    // Define method display
+    public void display(){
+        System.out.println("This is a generic vehicle.");
+    }
+    // Define an accessor method
+    public String getName(){
+        return this.name;
+    }
+}
+
+
+
+//Define class Car
+class Car extends Vehicle{
+    
+    public Car(String name){
+        super(name);
+    }
+    public void display(){
+        System.out.println("This is a car named "+ getName() + " .");
+    }
+}
+class Bicycle extends Vehicle{
+    public Bicycle(String name){
+        super(name);
+    }
+    //override display
+    public void display(){
+        System.out.println("This is a Bicycle named "+ getName() + " .");
+    }
+}
+
+//Define class Bicycle
+public class DispatchExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Vehicle[] vehicles = new Vehicle[3];
+        vehicles[0] = new Vehicle("");
+        vehicles[1] = new Car(sc.nextLine());
+        vehicles[2] = new Bicycle(sc.nextLine());
+        for (Vehicle v : vehicles) {
+            v.display();
+        }
+        sc.close();
+    }
+}
+
+------------------------------------------------------------------------------------------------
+
+// Question-4  copy Maps
+// Problem Statement
+// Write a Java program that, given as input the names of employees in an insurance company
+// and the policy sales target achieved by each of them in 3 consecutive months, prints the
+// names of those employees who have achieved at least 10 in all the months. Complete the
+// program as specified below.
+
+
+// • Class Company has/should have the following members:
+// – Private Instance variable Map<String, ArrayList<Integer>> employeeMap (maps
+// the employee name to the list of the sales target achieved by them in each month).
+// – A constructor to initialize the instance variable.
+// – An accessor method to access the instance variable.
+
+
+// • Class FClass has the following members:
+// – A method getFinalList() that takes an object of class Company as input and
+// returns the list of employee names who has/have scored at least 10 in all the
+// months.
+
+
+// – main() method does the following:
+// ∗ accepts inputs to instantiate an object of Company. The input is accepted in
+// the order - employee name followed by the list of their policy sales target.
+// ∗ invokes method getFinalList(), to get the list of employee names who
+// has/have achieved at least 10 in all the months.
+// ∗ prints the list returned by the method getFinalList()
+
+// What you have to do
+// • Define method getFinalList() of class FClass.
+
+/*
+Input:
+Ram 10 9 8
+Ravi 10 15 10
+Parvathi 10 13 9
+Output:
+[Ravi]
+*/
+
+import java.util.*;
+class Company{
+    private Map<String, ArrayList<Integer>> employeeMap;
+    public Company( Map<String, ArrayList<Integer>> e) {
+        employeeMap = e;
+    }
+    public Map<String, ArrayList<Integer>> getEmployeeMap(){
+        return employeeMap;
+    }
+}
+public class FClass {
+    public static ArrayList<String> getFinalList(Company c) {
+        Map<String, ArrayList<Integer>> eMap = c.getEmployeeMap();
+        ArrayList<String> out = new ArrayList<>();
+        for(Map.Entry<String, ArrayList<Integer>> entry : eMap.entrySet()){
+            ArrayList<Integer> monthly_sales = entry.getValue();
+            boolean all_values_more = true;
+
+            for(Integer sale : monthly_sales){
+                if(sale < 10){
+                    all_values_more = false;
+                }
+            }
+
+            if(all_values_more){
+                out.add(entry.getKey());
+            }
+        }
+        return out;
+
+
+
+    // Define the method getFinalList( ) here
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Map<String, ArrayList<Integer>> emap = new LinkedHashMap<String, ArrayList<Integer>>();
+
+        // "empl1" : [12,10,9,5,6,....], "emp2" : [10,20,30,12,13....], "epl3":[.....]
+        for(int i = 0; i < 3; i++) {
+            ArrayList<Integer> targetList = new ArrayList<Integer>();
+            String name = sc.next();
+            for(int j = 0; j < 3; j++) {
+                targetList.add(sc.nextInt());
+            }
+            emap.put(name, targetList);
+        }
+        Company c = new Company(emap);
+        System.out.println(getFinalList(c));
+    }
+}
+
+------------------------------------------------------------------------------------------------
+
+// Question-5 Generics
+// Problem Statement
+// Write a Java program to find the sum of two complex numbers. You are given as input two
+// integers n1, n2 and two double values d1, d2, from which two complex numbers c1 and
+// c2 are obtained as described below.
+// • The real parts of c1 and c2 are n1 and d1 respectively, whereas their imaginary parts
+// are n2 and d2, respectively.
+
+
+// Class ComplexNum is a generic class with the following members.
+
+// • Instance variables r and i
+// • A constructor to initialize r and i
+
+// • Method add to return the sum of two instances of generic type ComplexNum
+
+// • Method toString() to format the output as is given in the test cases.
+// Class FClass has method main that does the following:
+// • Accepts two integers n1 and n2, and two doubles d1 and d2 as input
+// • Creates two objects of ComplexNum using the input values
+// • Invokes method add to obtain the sum
+// • prints the sum
+// What you have to do
+// • Define class ComplexNum
+
+
+
+import java.util.*;
+//DEFINE class ComplexNum
+class ComplexNum<T extends Number>{
+    T r; 
+    T i;
+    public ComplexNum(T r, T i){
+        this.r = r;
+        this.i = i;
+    }
+    public ComplexNum<Double> add(ComplexNum<?> c){ //I am accepting any type
+        //sum real part
+        Double real = this.r.doubleValue() + c.r.doubleValue();
+        Double img = this.i.doubleValue() + c.i.doubleValue();
+        ComplexNum<Double> sComplexNum = new ComplexNum<>(real, img);
+        return sComplexNum;
+
+    }
+    //override toString
+    public String toString(){
+        return this.r.doubleValue() + " + " + this.i.doubleValue() + "i";
+    }
+
+}
+
+
+
+class FClass{
+    public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n1, n2;
+    double d1, d2;
+    n1 = sc.nextInt();
+    n2 = sc.nextInt();
+    d1 = sc.nextDouble();
+    d2 = sc.nextDouble();
+
+    
+    ComplexNum<Integer> c1 = new ComplexNum<Integer>(n1, n2);
+    ComplexNum<Double> c2 = new ComplexNum<Double>(d1, d2);
+    ComplexNum<Double> c3 = c1.add(c2);
+    System.out.println(c1 + " + " + c2 + " = " + c3);
+    }
+}
+
+/*
+Input:
+6 10
+10.3 15.6
+Output:
+6.0 + 10.0i + 10.3 + 15.6i = 16.3 + 25.6i
+
+*/
+
+
+------------------------------------------------------------------------------------------------
+
+// Question 6 -  Maps
+// Problem Statement
+// Complete the Java program that takes as input 4 Shop objects and the list of Shop objects
+// with attributes shop name, and number of items sold nsold. The program should add each
+// customer name as a key and the number of items as a value to the map object. After adding
+// all objects to the map, display the shop name which has sold the maximum number of items,
+// as shown in the test cases. Complete the program as specified below:
+
+
+// • Class Shop that has the following members:
+// – String name, int nsold as private instance variable
+// – Constructor to initialize the name and nsold
+// – Accessor methods to all instance variables
+
+// • Class MapTest has the following members:
+// – You should define method public static void printShopName(ArrayList<Shop>
+// sList) that does the following:
+
+
+// ∗ Iterates over array sList such that in each iteration, add each customer
+// name as key and number of items as value to the map object.
+// ∗ Print the shop name which has sold the maximum number of items.
+
+
+// – main method has the following functionality
+// ∗ Creates a list of 4 Shop objects.
+// ∗ Invokes method printShopName(list) to print the shop name which has
+// sold the maximum number of items.
+
+// What you have to do:
+// • Define method printShopName inside class MapTest
+
+
+/*
+Input:
+SuperBazar 30
+More 40
+Shopsy 30
+More 30
+
+Output:
+More : 70
+
+*/
+
+import java.util.*;
+class Shop{
+    private String name;
+    private int nsold;
+    public Shop(String s, int ns){
+        this.name = s;
+        this.nsold = ns;
+    }
+    public String getName(){
+        return name;
+    }
+    public int getItemSold(){
+        return nsold;
+    }
+}
+
+public class MapTest {
+    public static void printShopName(ArrayList<Shop> sList) {
+        Map<String, Integer> m = new LinkedHashMap<String, Integer>();
+        String shop = ""; //shop_max
+        int sold = 0; //max_sales
+        // Write your code here
+        for(Shop s : sList){
+            String key = s.getName();
+            Integer value = s.getItemSold();
+            //(key, value) -> check if the key is already present, true -> add value + existing value
+
+            //m -> [sb=30, more=40, bb=20, more=30]
+            
+            m.put(key, m.getOrDefault(key, 0) + value);
+        }
+
+        for(Map.Entry<String, Integer> entry : m.entrySet()){
+            if(entry.getValue()>sold){
+                sold = entry.getValue();
+                shop = entry.getKey();
+            }
+        }
+
+        System.out.println(shop + " : " + sold);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Shop> list = new ArrayList<Shop>();
+        for (int i = 0; i < 4; i++) {
+            list.add(new Shop(sc.next(), sc.nextInt()));
+        }
+        printShopName(list);
+    }
+}

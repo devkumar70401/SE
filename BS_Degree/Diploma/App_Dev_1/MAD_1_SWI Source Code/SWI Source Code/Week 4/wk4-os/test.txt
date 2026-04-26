@@ -1,0 +1,26 @@
+#import
+#app
+#csv data
+# @route,/
+    # def()
+    #   csv data
+    #      slectid> course data, student data,
+    #      ip id(courseid or studentid)
+        #    if select id==student id
+        #          if-else 1.student id>render associated with that
+                        # 2. wrong html
+        #    if course id
+        #          if-else 1.course id>render associated with that
+                        # 2. wrong html
+
+from flask....
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("Agg") 
+import csv
+
+
+x= course_marks
+plt.clf()
+plt.hist(x)
+plt.savefig("static/hist.png")

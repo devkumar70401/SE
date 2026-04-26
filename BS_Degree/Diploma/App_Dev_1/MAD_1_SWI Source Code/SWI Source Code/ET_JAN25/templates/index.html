@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Macro</title>
+</head>
+<body>
+    {% macro unordered_list(items)%}
+        <ul>
+        {% for item in items %}
+            <li><a href="/{{item}}">{{item|capitalize}}</a></li>
+        {% endfor %}
+        </ul>
+    {% endmacro %}
+    {{ unordered_list(links) }}
+</body>
+</html>
